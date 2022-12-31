@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
@@ -18,6 +18,8 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
   const [progress, setProgress] = useState(0)
   const multiplier = 1000
 
+  const [scrolledYet, setScrolledYet] = useState(false)
+
   useEffect(() => {
     new ScrollTrigger({
       scroller: scrollContainerRef.current,
@@ -27,19 +29,40 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
       scrub: true,
       onUpdate: (self) => {
         setProgress(self.progress.toFixed(3) * 100)
+        setScrolledYet(true)
       }
     })
   }, [height])
 
   return (
     <ScrollContainer className="scroll-container" ref={scrollContainerRef}>
+      {scrolledYet?null:<ScrollDown>Scroll Down</ScrollDown>}
       <ScrollTracker style={{ display: progressBar ? 'block' : 'none' }} $color={progressBarColor}>
-        <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor} />
+        <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor}></ScrollProgress>
       </ScrollTracker>
       <ScrollHeight className="scroll-height" ref={scrollHeightRef} $height={height * multiplier} />
     </ScrollContainer>
   )
 }
+
+export const scrollDownAnimation = keyframes`
+  0% { opacity: 0 }
+  50% { opacity: 1 }
+  100% { opacity: 0 }
+`
+
+export const ScrollDown = styled.b`
+  opacity: 1;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  fontSize: 13px;
+  color: white;
+  animation-name: ${scrollDownAnimation};
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+`
 
 export const ScrollContainer = styled.div`
   position: fixed;
