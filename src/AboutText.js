@@ -13,14 +13,14 @@ export default function AboutText() {
 
   return (
     <AboutContainer>
-      <TextContent>Hi, I'm Paula Zhu and I like to code random stuff sometimes.</TextContent>
+      <TextContent>Hi, I'm Paula Zhu and sometimes I like coding random stuff.</TextContent>
       <br/>
       <br/>
-      <TextContent>This is going to be the about page for this website. I'm going to put cool stuff I've found/built on here.</TextContent>
+      <TextContent>This is the about page. I'm going to put cool stuff I've found/built on here.</TextContent>
       <br/>
       <br/>
       <br/>
-      <TextContent>I randomly decided to learn Three JS and gsap yesterday, so for now, this website is mainly about that. Three JS is a library for 3D computer graphics using WebGL.</TextContent>
+      <TextContent>I decided to learn Three JS yesterday, so for now, this website is mainly about that. Three JS is a JS-based WebGL engine for 3D graphics.</TextContent>
       <br/>
       <br/>
       <br/>
