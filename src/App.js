@@ -1,19 +1,22 @@
 import React from 'react';
 import {
+  BrowserRouter,
   Navigate,
   Route,
-  Routes,
+  Routes
 } from 'react-router-dom';
 import About from './About'
 import Main from './Main'
 
 const App = () => {
+
   return (
+    <BrowserRouter>
     <Routes>
-      <Route path='/about' component = { About } />
-      <Route path='/' component={Main} />
-      <Navigate to='/' />
+      <Route path='/about' element = {<About/>} />
+      <Route exact path='/' element={<Main/>} />
     </Routes>
+    </BrowserRouter>
 
   )
 }
