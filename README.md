@@ -1,6 +1,7 @@
 # paula's website
 playing around with ThreeJS in React by paula zhu
 
+https://www.paulazhu.com
 
 ### Currently (221229) works with
 - node: v16.15.1
