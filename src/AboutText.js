@@ -7,10 +7,15 @@ export default function AboutText() {
 
   return (
     <AboutContainer>
-      <TextContent>Hi, I'm Paula and this is the about page.</TextContent>
+      <TextContent>Hi, I'm Paula Zhu and I like to code random stuff sometimes.</TextContent>
       <br/>
       <br/>
-      <TextContent>This website is about using React with Three JS, a library for animated 3D computer graphics using WebGL. I'm going to put cool stuff that I've found/built on here.</TextContent>
+      <TextContent>This is going to be the about page for this website. I'm going to put cool stuff I've found/built on here.</TextContent>
+      <br/>
+      <br/>
+      <br/>
+      <TextContent>
+        I decided to learn about Three JS yesterday, so for now, this website is mainly about that. Three JS is a library for animated 3D computer graphics using WebGL.</TextContent>
     </AboutContainer>
   )
 }

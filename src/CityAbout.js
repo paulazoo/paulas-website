@@ -69,7 +69,7 @@ export default function CityAbout() {
   return (
     <>
       <Global />
-      <Canvas style={{ background: '#cc7b32' }} camera={{ position: [0, 100, -100], fov: 20, rotation:[0,0,0] }}>
+      <Canvas style={{ background: '#cc7b32' }} camera={{ position: [0, 75, -100], fov: 20, rotation:[0,0,0] }}>
         <Scene>
         </Scene>
       </Canvas>
