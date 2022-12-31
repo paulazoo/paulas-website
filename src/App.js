@@ -5,7 +5,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
-import About from './About'
+import CityAbout from './CityAbout'
 import Main from './Main'
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/about' element = {<About/>} />
+      <Route path='/about' element = {<CityAbout/>} />
       <Route exact path='/' element={<Main/>} />
     </Routes>
     </BrowserRouter>
