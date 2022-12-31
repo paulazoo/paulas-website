@@ -1,55 +1,44 @@
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const dist = path.resolve(__dirname, 'dist');
-const src = path.resolve(__dirname, 'src');
-
 module.exports = {
-  entry: path.resolve(src, 'index.js'),
+  mode: 'development',
+  entry: './src/app.js',
   output: {
-    filename: '[name].[hash].js',
-    path: dist
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(gltf)$/,
-        use: [
-          {
-            loader: "gltf-webpack-loader"
-          }
-        ]
-      },
-      {
-        test: [/\.(bin)$/, /\.(jpg)$/, /\.(png)$/],
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name]-[hash].[ext]'
-            }
-          }
-        ]
-      }
+        exclude: /node_modules/,
+        test: /\.(glb|gltf)$/,
+            use:
+            [
+                {
+                    loader: 'file-loader',
+                    options:
+                    {
+                        outputPath: 'assets/'
+                    }
+                }
+            ]
+        }
     ]
   },
   devServer: {
-    contentBase: dist,
-    watchContentBase: true,
-    overlay: true,
+    client: {
+      overlay: true
+    },
     hot: true,
+    watchFiles: ['src/*', 'index.html']
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(src, 'index.html')
+    new CopyWebpackPlugin({
+      patterns: ['index.html']
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
