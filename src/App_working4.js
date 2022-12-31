@@ -17,8 +17,7 @@ const Scene = () => {
 
   useFrame(state => {
       state.camera.lookAt(vec.set(0,0,10))
-     // state.camera.position.lerp(vec.set(0,0,-1), .1)
-     state.camera.position.lerp(vec.set(state.mouse.x / 2, state.mouse.y / 2, -1), 0.01)
+      state.camera.position.lerp(vec.set(0,0,-1), .1)
       state.camera.updateProjectionMatrix()
       return null;
   })
@@ -47,11 +46,11 @@ const Scene = () => {
 
   return (
     <>
-      <Caption start={'10%'} end={'50%'}
-      startY={1} endY={3}
+      <Caption start={'5%'} end={'50%'}
+      startY={1} endY={5}
       startOpacity={1} endOpacity={0}
       >{`Hi, I'm Paula\n\nThis is my website`}</Caption>
-      <Caption start={'20%'} end={'90%'} 
+      <Caption start={'50%'} end={'100%'} 
       startY={0} endY={1}
       startOpacity={0} endOpacity={1}>{`here's some threejs+gsap :)`}</Caption>
     </>
@@ -59,17 +58,14 @@ const Scene = () => {
 }
 
 const App = () => {
-    const parentRef = useRef()
-
   return (
-    <div id="parentRef" ref={parentRef}>
+    <>
       <Canvas shadows dpr={[1, 2]}
       camera={{position: [0, 0, -1], fov:100, rotation:[0,0,0]}}
         style={{
        backgroundColor: '#111a21',
        width: '100vw',
-       height: '100vh',}}
-       eventSource={parentRef}>
+       height: '100vh',}}>
        <Stars/>
         <Suspense fallback={null}>
           <Stage intensity={0.3}>
@@ -78,7 +74,7 @@ const App = () => {
         </Suspense>
       </Canvas>
       <Scroller progressBar={true} progressBarColor="hotpink" />
-    </div>
+    </>
   )
 }
 
@@ -107,16 +103,15 @@ function Stars(props) {
 
 
   const Caption = ({ start = '10%', end='50%', startY=1, endY=10, startOpacity=1, endOpacity=1, children }) => {
-    const [captionParams, setCaptionParams] = useState(() => ({ x:0, z:0, y: startY, opacity: startOpacity }))
+    const [captionParams, setCaptionParams] = useState(() => ({ z:0, y: startY, opacity: startOpacity }))
   
     useEffect(() => {
-        setCaptionParams({ x:0, z:0, y: startY, opacity: startOpacity })
+        setCaptionParams({ z:0, y: startY, opacity: startOpacity })
     }, [])
 
     useEffect(() => {
       // Example of using ScrollTrigger with GSAP to update properties w/ controlled start/end times
       gsap.to(captionParams, {
-        x:0,
         y: endY,
         z:0,
         opacity: endOpacity,
@@ -131,7 +126,7 @@ function Stars(props) {
   
     return (
         <Text
-        position={[captionParams.x, captionParams.y, captionParams.z]}
+        position={[0, captionParams.y, captionParams.z]}
         rotation={[0,Math.PI,0]}
           size={50}
           height={50}
