@@ -115,7 +115,7 @@ function Stars({start, end, ...props}) {
 
 
   const Caption = ({ start = '10%', end='50%', startY=1, endY=10, startOpacity=1, endOpacity=1, children }) => {
-    const [captionParams, setCaptionParams] = useState(() => ({ x:0, z:0, y: startY, opacity: startOpacity }))
+    const [captionParams, setCaptionParams] = useState(() => ({ x:0, z:0, y: 0, opacity: startOpacity }))
   
     useEffect(() => {
         setCaptionParams({ x:0, z:0, y: startY, opacity: startOpacity })
@@ -147,6 +147,43 @@ function Stars({start, end, ...props}) {
           {children}
           <meshStandardMaterial attach="material" opacity={captionParams.opacity}/>
         </Text>
+    )
+  }
+
+  const Thing = ({ start = '10%', end='50%', startY=0, endY=10, startOpacity=0, endOpacity=1, children }) => {
+    const [thingParams, setThingParams] = useState(() => ({ x:0, z:0, y: 0, opacity: 0 }))
+  
+    useEffect(() => {
+        setThingParams({ x:-2, z:2, y: startY, opacity: startOpacity })
+    }, [])
+
+    useEffect(() => {
+      // Example of using ScrollTrigger with GSAP to update properties w/ controlled start/end times
+      gsap.to(thingParams, {
+        x:-2,
+        y: endY,
+        z:2,
+        opacity: endOpacity,
+        ease: Power3.easeInOut,
+        scrollTrigger: {
+          ...scrollerConfig,
+          start: start,
+          end: end
+        }
+      })
+    }, [thingParams, start, end, endY, endOpacity])
+  
+    return (
+        <Dodecahedron
+        castShadow={false}
+        position={[thingParams.x, thingParams.y, thingParams.z]}
+        rotation={[0,Math.PI,0]}>
+          <meshNormalMaterial attach="material" 
+        transparent={true}
+        opacity={thingParams.opacity}
+        wireframe={false}
+        />
+        </Dodecahedron>
     )
   }
 
