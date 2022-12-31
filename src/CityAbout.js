@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect
+import React, { Suspense, useEffect, useRef
  } from 'react'
 import { Canvas, useFrame} from '@react-three/fiber'
 import RedCityObject from './RedCityObject'
@@ -65,16 +65,20 @@ export const Global = createGlobalStyle`
 `
 
 export default function CityAbout() {
+  const parentRef = useRef()
 
   return (
-    <>
+    <div id="parentRef" ref={parentRef}>
       <Global />
-      <Canvas style={{ background: '#cc7b32' }} camera={{ position: [0, 75, -100], fov: 20, rotation:[0,0,0] }}>
+      <Canvas style={{ background: '#cc7b32',
+       width: '100vw',
+       height: '100vh' }} camera={{ position: [0, 75, -100], fov: 20, rotation:[0,0,0] }}
+       eventSource={parentRef}>
         <Scene>
         </Scene>
       </Canvas>
       <AboutText/>
-    </>
+    </div>
   )
 }
 
@@ -82,6 +86,11 @@ const Scene = () => {
   const vec = new THREE.Vector3()
 
   useFrame((state, delta) => {
+    let posX = state.camera.position.x+(state.mouse.x / 2)
+    let posY = state.camera.position.y+(state.mouse.y / 2)
+    if (posX > -100 && posX < 100 && posY > 0 && posY < 100) {
+      state.camera.position.lerp(vec.set(posX, posY, state.camera.position.z), 0.2)
+    }
       state.camera.lookAt(vec.set(state.camera.position.x,state.camera.position.y, state.camera.position.z+10))
       state.camera.position.lerp(vec.set(0, 0, -100), 0.005)
       state.camera.updateProjectionMatrix()

@@ -1,5 +1,10 @@
 import { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 import styled, {keyframes} from 'styled-components';
+import {
+  Button
+} from '@mui/material';
+
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
@@ -13,6 +18,8 @@ export const scrollerConfig = {
 }
 
 export default function Scroller({ height = 10, progressBar = false, progressBarColor = '#fbf5ef' }) {
+  const navigate = useNavigate();
+
   const scrollContainerRef = useRef()
   const scrollHeightRef = useRef()
   const [progress, setProgress] = useState(0)
@@ -41,6 +48,14 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
         <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor}></ScrollProgress>
       </ScrollTracker>
       <ScrollHeight className="scroll-height" ref={scrollHeightRef} $height={height * multiplier} />
+      <Button
+        onClick={() => navigate('/about')}
+        variant='outlined'
+        style={{bottom: '50px',
+        float:'right', right:'50px'}}
+      >
+        About
+      </Button>
     </ScrollContainer>
   )
 }

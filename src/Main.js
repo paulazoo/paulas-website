@@ -37,11 +37,11 @@ const Scene = () => {
 
   return (
     <>
-      <Caption start={'5%'} end={'60%'}
+      <Caption start={'5%'} end={'70%'}
       startY={1} endY={3}
       startOpacity={1} endOpacity={0}
       >{`Hi, I'm Paula Zhu\n\nThis is my website`}</Caption>
-      <Caption start={'30%'} end={'100%'} 
+      <Caption start={'40%'} end={'100%'} 
       startY={0} endY={1}
       startOpacity={0} endOpacity={1}>{`here's some cool threeJS + gsap :)`}</Caption>
     </>
@@ -60,7 +60,7 @@ const Main = () => {
        width: '100vw',
        height: '100vh',}}
        eventSource={parentRef}>
-       <Stars start={'50%'} end={'90%'}/>
+       <Stars start={'40%'} end={'90%'}/>
         <Suspense fallback={null}>
           <Stage intensity={0.3}>
             <Scene />

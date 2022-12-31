@@ -1,9 +1,15 @@
 import { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 import styled, {keyframes} from 'styled-components';
 import { gsap } from 'gsap'
 
+import {
+  Button
+} from '@mui/material';
+
 export default function AboutText() {
 
+  const navigate = useNavigate();
 
   return (
     <AboutContainer>
@@ -14,8 +20,19 @@ export default function AboutText() {
       <br/>
       <br/>
       <br/>
-      <TextContent>
-        I decided to learn about Three JS yesterday, so for now, this website is mainly about that. Three JS is a library for animated 3D computer graphics using WebGL.</TextContent>
+      <TextContent>I randomly decided to learn Three JS and gsap yesterday, so for now, this website is mainly about that. Three JS is a library for 3D computer graphics using WebGL.</TextContent>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Button
+        onClick={() => navigate('/')}
+        variant='outlined'
+      >
+        Back to Main Page
+      </Button>
     </AboutContainer>
   )
 }
@@ -28,10 +45,11 @@ export const TextContent = styled.b`
 }
 `
 
+
 export const AboutContainer = styled.div`
   position: absolute;
   left: 50%;
-  top: 100px;
+  top: 200px;
   transform: translate(-50%, -50%);
   width: 50vw;
 }
