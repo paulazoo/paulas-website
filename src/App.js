@@ -18,7 +18,7 @@ const Scene = () => {
   useFrame(state => {
       state.camera.lookAt(vec.set(0,0,10))
      // state.camera.position.lerp(vec.set(0,0,-1), .1)
-     state.camera.position.lerp(vec.set(state.mouse.x / 2, state.mouse.y / 2, -1), 0.01)
+     state.camera.position.lerp(vec.set(state.mouse.x / 2, state.mouse.y / 2, -1), 0.05)
       state.camera.updateProjectionMatrix()
       return null;
   })
