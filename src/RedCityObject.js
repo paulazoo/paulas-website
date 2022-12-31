@@ -7,11 +7,11 @@ title: Red City
 */
 
 import React, { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
+import { useLoader, useFrame } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export default function Model(props) {
-  const { scene } = useGLTF('scene.glb')
+  const { scene } = useLoader(GLTFLoader, 'scene.glb')
   const cityRef = useRef()
   useFrame((state, delta) => {
     cityRef.current.rotation.y -= delta / 10
