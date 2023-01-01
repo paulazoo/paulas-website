@@ -14,6 +14,8 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+      },
+      {
         test: /\.(glb|gltf)$/,
             use:
             [
@@ -21,7 +23,8 @@ module.exports = {
                     loader: 'file-loader',
                     options:
                     {
-                        outputPath: 'assets/'
+                      name: '[name].[ext]',
+                      outputPath: 'assets/'
                     }
                 }
             ]
