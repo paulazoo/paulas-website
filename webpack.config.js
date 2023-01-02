@@ -22,17 +22,7 @@ module.exports = {
       },
       {
         test: /\.(glb|gltf)$/,
-            use:
-            [
-                {
-                    loader: 'file-loader',
-                    options:
-                    {
-                      name: '[name].[ext]',
-                      outputPath: 'assets/'
-                    }
-                }
-            ]
+        type: 'asset/resource', //https://webpack.js.org/guides/asset-modules/
         }
     ],
   },
