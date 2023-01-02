@@ -9,7 +9,7 @@ import {
   createTheme, ThemeProvider
 } from '@mui/material/styles';
 import CityAbout from './CityAbout'
-import Main from './Main'
+import MainContainer from './MainContainer';
 
 const theme = createTheme({
   palette: {
@@ -26,7 +26,7 @@ const App = () => {
     <BrowserRouter>
     <Routes>
       <Route path='/about' element = {<CityAbout/>} />
-      <Route exact path='/' element={<Main/>} />
+      <Route exact path='/' element={<MainContainer/>} />
     </Routes>
     </BrowserRouter>
     </ThemeProvider>

@@ -17,8 +17,11 @@ https://www.paulazhu.com
 - `npm run build` to look at dist folder
 
 ### Amplify
-- App Settings>Build Settings>amplify.yml
+- In Build Settings>amplify.yml
     - change artifacts > baseDirectory from `build` to `dist`
+- In Rewrites and Redirects>200 (Rewrite)
+    - add `|glb` to the end
+    - (</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json|glb)$)([^.]+$)/>)
 
 ### With inspiration from:
 - https://dev.to/nourdinedev/how-to-use-threejs-and-react-to-render-a-3d-model-of-your-self-4kkf

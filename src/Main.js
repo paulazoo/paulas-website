@@ -10,7 +10,6 @@ import gsap, { Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
 import Scroller, { scrollerConfig } from './Scroller'
-import Routes from './App'
 
 const Scene = () => {
   const [dodeRotation, setDodeRotation] = useState(0)
