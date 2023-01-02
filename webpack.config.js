@@ -21,7 +21,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(glb)$/i,
+        test: /\.(glb)$/,
         type: 'asset/resource', //https://webpack.js.org/guides/asset-modules/
         }
     ],
@@ -30,7 +30,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
     publicPath: '/',
-    assetModuleFilename: 'assets/[name].[ext]' //https://webpack.js.org/guides/asset-modules/
+    assetModuleFilename: 'assets/[name][ext]' //https://webpack.js.org/guides/asset-modules/
   },
   devServer: {
     port: 3000,
