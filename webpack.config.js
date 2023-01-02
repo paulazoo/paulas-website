@@ -1,50 +1,45 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const port = process.env.PORT || 3000;
+const path = require('path');
 
 module.exports = {
-  mode: 'development',  
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.[hash].js'
-  },
-  devtool: 'inline-source-map',
+  entry: path.resolve(__dirname, './src/index.js'),
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localsConvention: 'camelCase',
-              sourceMap: true
-            }
-          }
-        ]
-      }
-    ]
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(glb|gltf)$/,
+            use:
+            [
+                {
+                    loader: 'file-loader',
+                    options:
+                    {
+                      name: '[name].[ext]',
+                      outputPath: 'assets/'
+                    }
+                }
+            ]
+        }
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      favicon: 'public/favicon.ico'
-    })
-  ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js',
+  },
   devServer: {
-    host: 'localhost',
-    port: port,
+    port: 3000,
     historyApiFallback: true,
-    open: true
-  }
+    static: path.resolve(__dirname, './dist'),
+  },
 };

@@ -4,7 +4,7 @@ playing around with ThreeJS in React by paula zhu
 https://www.paulazhu.com
 
 ### Currently (221229) works with
-- node: v16.15.1
+- node: v16.15.1 (`nvm install 16.15.1`)
 - npm: 8.11.0
 
 ### requires:
