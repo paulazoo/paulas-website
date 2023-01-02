@@ -9,7 +9,7 @@ title: Red City
 import React, { useRef } from 'react'
 import { useLoader, useFrame } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import modelPath from "./assets/scene.glb";
+import modelPath from "./scene.glb";
 
 
 export default function Model(props) {

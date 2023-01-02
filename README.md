@@ -14,6 +14,7 @@ https://www.paulazhu.com
 
 ### webpack:
 - `npm run serve`
+- `npm run build` to look at dist folder
 
 ### Amplify
 - App Settings>Build Settings>amplify.yml

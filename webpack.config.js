@@ -30,7 +30,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
     publicPath: '/',
-    assetModuleFilename: 'assets/[name][ext]' //https://webpack.js.org/guides/asset-modules/
+    assetModuleFilename: '[name][ext]' //https://webpack.js.org/guides/asset-modules/
   },
   devServer: {
     port: 3000,
