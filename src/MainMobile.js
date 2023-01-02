@@ -6,6 +6,7 @@ import * as THREE from 'three'
 
 import * as random from 'maath/random/dist/maath-random.esm'
 import styled, {keyframes} from 'styled-components';
+import {Button} from '@mui/material';
 
 import gsap, { Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -54,7 +55,7 @@ const Scene = () => {
 }
 
 const MainMobile = () => {
-    const parentRef = useRef()
+  const parentRef = useRef()
 
   return (
     <div id="parentRef" ref={parentRef}>
@@ -72,7 +73,7 @@ const MainMobile = () => {
           </Stage>
         </Suspense>
       </Canvas>
-        <Warning>{`this website's heavy graphics work best on desktop :)`}</Warning>
+        <Warning>{`btw this website's graphics are way better on desktop :)`}</Warning>
       <Scroller progressBar={false} progressBarColor="lightblue" />
     </div>
   )
@@ -93,7 +94,7 @@ export default MainMobile
 
 function Stars({start, end, ...props}) {
     const pointsRef = useRef()
-    const [sphere] = useState(() => random.inSphere(new Float32Array(100), { radius: 1.5 }))
+    const [sphere] = useState(() => random.inSphere(new Float32Array(200), { radius: 1.5 }))
     const [pointsParams] = useState(() => ({ z:0, y:0, opacity:1}))
   
     useFrame((state, delta) => {

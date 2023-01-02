@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import styled, {keyframes} from 'styled-components';
-import {
-  Button
-} from '@mui/material';
+import {Button} from '@mui/material';
+import {isMobile} from 'react-device-detect';
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -40,24 +39,43 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
       }
     })
   }, [height])
-
-  return (
-    <ScrollContainer className="scroll-container" ref={scrollContainerRef}>
-      {scrolledYet?null:<ScrollDown>Scroll Down</ScrollDown>}
-      <ScrollTracker style={{ display: progressBar ? 'block' : 'none' }} $color={progressBarColor}>
-        <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor}></ScrollProgress>
-      </ScrollTracker>
-      <ScrollHeight className="scroll-height" ref={scrollHeightRef} $height={height * multiplier} />
-      <Button
-        onClick={() => navigate('/about')}
-        variant='outlined'
-        style={{bottom: '50px',
-        float:'right', right:'50px'}}
-      >
-        About
-      </Button>
-    </ScrollContainer>
-  )
+  
+  if (isMobile) {
+    return (
+      <ScrollContainer className="scroll-container" ref={scrollContainerRef}>
+        <ScrollTracker style={{ display: progressBar ? 'block' : 'none' }} $color={progressBarColor}>
+          <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor}></ScrollProgress>
+        </ScrollTracker>
+        <ScrollHeight className="scroll-height" ref={scrollHeightRef} $height={height * multiplier} />
+        <Button
+          onClick={() => navigate('/about')}
+          variant='outlined'
+          style={{position:'absolute', bottom:'50px',
+          float:'right', right:'50px'}}
+        >
+          About
+        </Button>
+      </ScrollContainer>
+      )
+  } else {
+    return (
+      <ScrollContainer className="scroll-container" ref={scrollContainerRef}>
+        {scrolledYet?null:<ScrollDown>Scroll Down</ScrollDown>}
+        <ScrollTracker style={{ display: progressBar ? 'block' : 'none' }} $color={progressBarColor}>
+          <ScrollProgress style={{ width: `${progress}%` }} $color={progressBarColor}></ScrollProgress>
+        </ScrollTracker>
+        <ScrollHeight className="scroll-height" ref={scrollHeightRef} $height={height * multiplier} />
+        <Button
+          onClick={() => navigate('/about')}
+          variant='outlined'
+          style={{bottom: '50px',
+          float:'right', right:'50px'}}
+        >
+          About
+        </Button>
+      </ScrollContainer>
+      )
+  }
 }
 
 export const scrollDownAnimation = keyframes`

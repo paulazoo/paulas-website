@@ -16,6 +16,7 @@ export default function AboutText() {
       <TextContent>Hi, I'm Paula Zhu, and sometimes I like coding random stuff.</TextContent>
       <br/>
       <br/>
+      <br/>
       <TextContent>This is the about page. I'm going to put cool stuff I've found/built on here.</TextContent>
       <br/>
       <br/>
