@@ -12,6 +12,9 @@ https://www.paulazhu.com
 - @react-three/fiber
 - gsap
 
+### webpack:
+- `npm run serve`
+
 ### Amplify
 - App Settings>Build Settings>amplify.yml
     - change artifacts > baseDirectory from `build` to `dist`
