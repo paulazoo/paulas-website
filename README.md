@@ -12,6 +12,10 @@ https://www.paulazhu.com
 - @react-three/fiber
 - gsap
 
+### Amplify
+- App Settings>Build Settings>amplify.yml
+    - change artifacts > baseDirectory from `build` to `dist`
+
 ### With inspiration from:
 - https://dev.to/nourdinedev/how-to-use-threejs-and-react-to-render-a-3d-model-of-your-self-4kkf
 - https://codesandbox.io/s/2csbr1?file=/src/App.js
