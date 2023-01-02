@@ -1,47 +1,50 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const port = process.env.PORT || 3000;
 
 module.exports = {
-  mode: 'development',
-  entry: './src/app.js',
+  mode: 'development',  
+  entry: './src/index.js',
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'bundle.[hash].js'
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js)$/,
         exclude: /node_modules/,
+        use: ['babel-loader']
       },
       {
-        test: /\.(glb|gltf)$/,
-            use:
-            [
-                {
-                    loader: 'file-loader',
-                    options:
-                    {
-                      name: '[name].[ext]',
-                      outputPath: 'assets/'
-                    }
-                }
-            ]
-        }
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localsConvention: 'camelCase',
+              sourceMap: true
+            }
+          }
+        ]
+      }
     ]
   },
-  devServer: {
-    client: {
-      overlay: true
-    },
-    hot: true,
-    watchFiles: ['src/*', 'index.html']
-  },
   plugins: [
-    new CopyWebpackPlugin({
-      patterns: ['index.html']
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+      favicon: 'public/favicon.ico'
+    })
+  ],
+  devServer: {
+    host: 'localhost',
+    port: port,
+    historyApiFallback: true,
+    open: true
+  }
 };
