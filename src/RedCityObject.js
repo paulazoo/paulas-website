@@ -22,5 +22,6 @@ export default function Model(props) {
     // <group ref={cityRef} position={[0, 0, 0]}>
     //   <primitive scale={[0.001, 0.001, 0.001]} object={scene} dispose={null} />
     // </group>
+    <>hi</>
   )
 }
