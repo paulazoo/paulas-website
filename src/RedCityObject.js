@@ -6,22 +6,21 @@ source: https://sketchfab.com/models/356c773c4b9a45d8b9d4aa04c60ecb27
 title: Red City
 */
 
-// import React, { useRef } from 'react'
-// import { useLoader, useFrame } from '@react-three/fiber'
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-// import modelPath from "./scene.glb";
+import React, { useRef } from 'react'
+import { useLoader, useFrame } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import modelPath from "./scene.glb";
 
 
 export default function Model(props) {
-  // const { scene } = useLoader(GLTFLoader, modelPath)
-  // const cityRef = useRef()
-  // useFrame((state, delta) => {
-  //   cityRef.current.rotation.y -= delta / 10
-  // })
+  const { scene } = useLoader(GLTFLoader, modelPath)
+  const cityRef = useRef()
+  useFrame((state, delta) => {
+    cityRef.current.rotation.y -= delta / 10
+  })
   return (
-    // <group ref={cityRef} position={[0, 0, 0]}>
-    //   <primitive scale={[0.001, 0.001, 0.001]} object={scene} dispose={null} />
-    // </group>
-    <>hi</>
+    <group ref={cityRef} position={[0, 0, 0]}>
+      <primitive scale={[0.001, 0.001, 0.001]} object={scene} dispose={null} />
+    </group>
   )
 }

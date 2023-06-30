@@ -23,7 +23,7 @@ module.exports = {
       {
         test: /\.(glb)$/,
         type: 'asset/resource', //https://webpack.js.org/guides/asset-modules/
-        }
+      }
     ],
   },
   output: {

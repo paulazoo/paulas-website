@@ -65,11 +65,11 @@ const Main = () => {
        height: '100vh',}}
        eventSource={parentRef}>
        <Stars start={'40%'} end={'90%'}/>
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}>
           <Stage intensity={0.3}>
             <Scene />
           </Stage>
-        </Suspense>
+        </Suspense> */}
       </Canvas>
       <Scroller progressBar={false} progressBarColor="lightblue" />
     </div>
