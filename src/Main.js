@@ -67,6 +67,7 @@ const Main = () => {
        <Stars start={'40%'} end={'90%'}/>
         <Suspense fallback={null}>
           {/* <Stage intensity={0.3}> */}
+          {/* Stage seems to cause errors now 230629 */}
             <Scene />
           {/* </Stage> */}
         </Suspense>
@@ -153,7 +154,8 @@ function Stars({start, end, ...props}) {
           size={50}
           height={50}>
           {children}
-          <meshStandardMaterial color={[1, 1, 1]} toneMapped={true} attach="material" opacity={captionParams.opacity}/>
+          {/* meshStandardMaterial requires light to be white, meshBasicMaterial doesn't. Also changed in mobileMain.js */}
+          <meshBasicMaterial color={[1, 1, 1]} toneMapped={true} attach="material" opacity={captionParams.opacity}/>
         </Text>
     )
   }

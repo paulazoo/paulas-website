@@ -165,7 +165,7 @@ function Stars({start, end, ...props}) {
           size={50}
           height={50}>
           {children}
-          <meshStandardMaterial color={[1, 1, 1]} toneMapped={true} attach="material" opacity={captionParams.opacity}/>
+          <meshBasicMaterial color={[1, 1, 1]} toneMapped={true} attach="material" opacity={captionParams.opacity}/>
         </Text>
     )
   }
