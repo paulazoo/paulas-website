@@ -5,13 +5,15 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 
 import * as random from 'maath/random/dist/maath-random.esm'
-import styled, {keyframes} from 'styled-components';
-import {Button} from '@mui/material';
 
 import gsap, { Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
 import Scroller, { scrollerConfig } from './Scroller'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const Scene = () => {
   const [dodeRotation, setDodeRotation] = useState(0)
@@ -55,10 +57,21 @@ const Scene = () => {
 }
 
 const MainMobile = () => {
-  const parentRef = useRef()
+    const parentRef = useRef()
 
   return (
     <div id="parentRef" ref={parentRef}>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5" component="div">
+            Hi!
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            This particular page's graphics are better on desktop.
+          </Typography>
+        </CardContent>
+      </Card>
+
       <Canvas shadows dpr={[1, 2]}
       camera={{position: [0, 0, -1], fov:100, rotation:[0,0,0]}}
         style={{
@@ -68,25 +81,16 @@ const MainMobile = () => {
        eventSource={parentRef}>
        <Stars start={'40%'} end={'90%'}/>
         <Suspense fallback={null}>
-          <Stage intensity={0.3}>
+          {/* <Stage intensity={0.3}> */}
+          {/* Stage seems to cause errors now 230629 */}
             <Scene />
-          </Stage>
+          {/* </Stage> */}
         </Suspense>
       </Canvas>
-        <Warning>{`btw this website's graphics are way better on desktop :)`}</Warning>
       <Scroller progressBar={false} progressBarColor="lightblue" />
     </div>
   )
 }
-
-export const Warning = styled.i`
-  opacity: 1;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  fontSize: 13px;
-  color: white;
-}`
 
 export default MainMobile
 
@@ -94,7 +98,7 @@ export default MainMobile
 
 function Stars({start, end, ...props}) {
     const pointsRef = useRef()
-    const [sphere] = useState(() => random.inSphere(new Float32Array(200), { radius: 1.5 }))
+    const [sphere] = useState(() => random.inSphere(new Float32Array(100), { radius: 1.5 }))
     const [pointsParams] = useState(() => ({ z:0, y:0, opacity:1}))
   
     useFrame((state, delta) => {
@@ -165,6 +169,7 @@ function Stars({start, end, ...props}) {
           size={50}
           height={50}>
           {children}
+          {/* meshStandardMaterial requires light to be white, meshBasicMaterial doesn't. Also changed in mobileMain.js */}
           <meshBasicMaterial color={[1, 1, 1]} toneMapped={true} attach="material" opacity={captionParams.opacity}/>
         </Text>
     )
@@ -213,4 +218,6 @@ function Stars({start, end, ...props}) {
         </group>
     )
   }
+
+
 
