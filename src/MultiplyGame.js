@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createRef} from 'react';
 import { useNavigate } from 'react-router';
 
 import Avatar from '@mui/material/Avatar';
@@ -21,6 +21,7 @@ const randomQuestion = () => {
 
 export default function MultiplyGame() {
     const navigate = useNavigate();
+    const textInput = createRef();
 
     const [answer, setAnswer] = useState('');
     const [[questionString, correctAnswer], setQuestion] = useState(['', 0]);
@@ -40,9 +41,11 @@ export default function MultiplyGame() {
             setAnswer('');
             setTotalCorrect(totalCorrect + 1);
             setQuestion(randomQuestion());
+            textInput.current.focus();
         } else {
             setShowUnsuccess(true);
             setShowSuccess(false);
+            textInput.current.focus();
         }
     };
 
@@ -123,6 +126,8 @@ export default function MultiplyGame() {
                     onChange={(event) => {
                         setAnswer(event.target.value);
                     }}
+                    autoFocus
+                    inputRef={textInput} 
                     />
                 </Grid>
                 <Grid item xs={0} md={3}></Grid>
