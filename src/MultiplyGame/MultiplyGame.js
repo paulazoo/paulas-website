@@ -24,7 +24,7 @@ export default function MultiplyGame() {
     const textInput = createRef();
 
     const [answer, setAnswer] = useState('');
-    const [[questionString, correctAnswer], setQuestion] = useState(['', 0]);
+    const [[questionString, correctAnswer], setQuestion] = useState(['', 1]);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showUnsuccess, setShowUnsuccess] = useState(false);
     const [totalCorrect, setTotalCorrect] = useState(0);
