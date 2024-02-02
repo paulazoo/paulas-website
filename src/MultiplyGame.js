@@ -22,9 +22,11 @@ const randomQuestion = () => {
 export default function MultiplyGame() {
     const navigate = useNavigate();
 
+    const [answer, setAnswer] = useState('');
     const [[questionString, correctAnswer], setQuestion] = useState(['', 0]);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showUnsuccess, setShowUnsuccess] = useState(false);
+    const [totalCorrect, setTotalCorrect] = useState(0);
 
     useEffect(() => {
         setQuestion(randomQuestion());
@@ -32,14 +34,11 @@ export default function MultiplyGame() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        playerAnswer: data.get('answer'),
-        correctAnswer: correctAnswer
-        });
-        if (Number(data.get('answer')) == correctAnswer) {
+        if (Number(answer) == correctAnswer) {
             setShowSuccess(true);
             setShowUnsuccess(false);
+            setAnswer('');
+            setTotalCorrect(totalCorrect + 1);
             setQuestion(randomQuestion());
         } else {
             setShowUnsuccess(true);
@@ -69,67 +68,81 @@ export default function MultiplyGame() {
             open={showSuccess}
             autoHideDuration={1000}
             onClose={handleSuccessSnackbarClose}
-            message="Correct!"
         > 
             <Alert
             onClose={handleSuccessSnackbarClose}
             severity="success"
             variant="filled"
-            sx={{ width: '100%' }}/>
+            sx={{ width: '100%' }}>
+                Correct!
+            </Alert>
         </Snackbar>
         <Snackbar
             anchorOrigin={{ vertical:'top', horizontal: 'center' }}
             open={showUnsuccess}
             autoHideDuration={1000}
             onClose={handleUnsuccessSnackbarClose}
-            message="Incorrect."
         >
             <Alert
             onClose={handleUnsuccessSnackbarClose}
             severity="error"
             variant="filled"
-            sx={{ width: '100%' }}/>
+            sx={{ width: '100%' }}>
+                Incorrect.
+            </Alert>
         </Snackbar>
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
+            marginRight: '20vw',
+            marginLeft: '20vw',
             alignItems: 'center',
+            align: "center",
+            justify: "center"
           }}
         >
-            <Grid item xs={12}>
-                <Typography component="h1" variant="h5" color='secondary'>
-                    {questionString}
-                </Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Grid container spacing={2} align = "center" justify = "center" alignItems = "center">
+                <Grid item xs={12}>
+                    <Typography color='secondary'>
+                        Total Correct: {totalCorrect}
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h3" color='secondary'>
+                        <b>{questionString}</b>
+                    </Typography>
+                </Grid>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={12} md={6}>
                     <TextField
-                    margin="normal"
                     fullWidth
-                    id="answer"
-                    label="Your Answer"
-                    name="answer"
-                    autoComplete="answer"
-                    autoFocus
+                    margin='normal'
+                    label="Answer"
+                    value={answer}
                     color='secondary'
+                    onChange={(event) => {
+                        setAnswer(event.target.value);
+                    }}
                     />
+                </Grid>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={12} md={6}>
                     <Button
-                    type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
                     color='secondary'
+                    onClick={handleSubmit}
                     >
                         <Typography color='primary'>Submit</Typography>
                     </Button>
-                </Box>
-            </Grid>
-            <Grid item xs={12}>
-                <Link onClick={() => navigate('/')} color='secondary'>
-                    Give up and go back to home?
-                </Link>
+                </Grid>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={12}>
+                    <Link onClick={() => navigate('/')} color='secondary'>
+                        Give up and go back to home?
+                    </Link>
+                </Grid>
             </Grid>
         </Box>
         </>
