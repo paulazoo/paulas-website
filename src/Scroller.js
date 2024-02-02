@@ -55,6 +55,14 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
         >
           About
         </Button>
+        <Button
+          onClick={() => navigate('/about')}
+          variant='outlined'
+          style={{position:'absolute', bottom:'50px',
+          float:'right', right:'70px'}}
+        >
+          About
+        </Button>
       </ScrollContainer>
       )
   } else {
@@ -72,6 +80,14 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
           float:'right', right:'50px'}}
         >
           About
+        </Button>
+        <Button
+          onClick={() => navigate('/multiply-game')}
+          variant='outlined'
+          style={{bottom:'50px',
+          float:'right', right:'150px'}}
+        >
+          Multiply Game
         </Button>
       </ScrollContainer>
       )

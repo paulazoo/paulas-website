@@ -42,7 +42,7 @@ const Scene = () => {
       >{`Hi, I'm Paula Zhu\n\nThis is my website`}</Caption>
       <Caption start={'40%'} end={'100%'} 
       startY={-1} endY={0}
-      startOpacity={0} endOpacity={1}>{`here's some cool threeJS + gsap :)`}</Caption>
+      startOpacity={0} endOpacity={1}>{`click a page :)`}</Caption>
       <Thing/>
         <EffectComposer multisampling={8}>
           <Bloom kernelSize={3} luminanceThreshold={1} luminanceSmoothing={0.4} intensity={0.6} />
