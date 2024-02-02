@@ -12,8 +12,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const randomQuestion = () => {
-    const num1 = Math.floor(Math.random() * 100);
-    const num2 = Math.floor(Math.random() * 100);
+    const num1 = Math.ceil(Math.random() * 100);
+    const num2 = Math.ceil(Math.random() * 100);
     const questionString = num1.toString()+ ' x ' + num2.toString();
     const correctAnswer = num1 * num2;
     return [questionString, correctAnswer];
@@ -33,8 +33,8 @@ export default function MultiplyGame() {
         setQuestion(randomQuestion());
     }, [])
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        console.log(Number(answer));
         if (Number(answer) == correctAnswer) {
             setShowSuccess(true);
             setShowUnsuccess(false);
@@ -63,6 +63,21 @@ export default function MultiplyGame() {
         }
         setShowUnsuccess(false);
     };
+
+    useEffect(() => {
+        function handleKeyDown(e) {
+          if (e.keyCode == 13) {
+            handleSubmit(e);
+          }
+        }
+    
+        document.addEventListener('keydown', handleKeyDown);
+    
+        // Don't forget to clean up
+        return function cleanup() {
+          document.removeEventListener('keydown', handleKeyDown);
+        }
+      }, [answer]);
 
     return (
         <>
@@ -128,6 +143,7 @@ export default function MultiplyGame() {
                     }}
                     autoFocus
                     inputRef={textInput} 
+                    sx={{ input: { fontWeight: 'bold' } }}
                     />
                 </Grid>
                 <Grid item xs={0} md={3}></Grid>
