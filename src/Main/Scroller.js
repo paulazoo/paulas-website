@@ -89,6 +89,14 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
         >
           Multiply Game
         </Button>
+        <Button
+          href='https://www.github.com/paulazoo'
+          variant='outlined'
+          style={{bottom:'50px',
+          float:'right', right:'250px'}}
+        >
+          GitHub
+        </Button>
       </ScrollContainer>
       )
   }

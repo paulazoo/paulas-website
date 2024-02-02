@@ -8,9 +8,9 @@ import {
 import {
   createTheme, ThemeProvider
 } from '@mui/material/styles';
-import CityAbout from './CityAbout'
-import MainContainer from './MainContainer';
-import MultiplyGame from './MultiplyGame';
+import CityAbout from './About/CityAbout'
+import MainContainer from './Main/MainContainer';
+import MultiplyGame from './MultiplyGame/MultiplyGame';
 
 const theme = createTheme({
   palette: {

@@ -28,10 +28,24 @@ export default function MultiplyGame() {
     const [showSuccess, setShowSuccess] = useState(false);
     const [showUnsuccess, setShowUnsuccess] = useState(false);
     const [totalCorrect, setTotalCorrect] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [averageTime, setAverageTime] = useState(null);
 
     useEffect(() => {
         setQuestion(randomQuestion());
     }, [])
+
+    const startTime = Date.now();
+    const getTime = (startTime) => {
+        const time = Date.now() - startTime;
+        setSeconds(Math.floor(time / 1000));
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => getTime(startTime), 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const handleSubmit = (e) => {
         console.log(Number(answer));
@@ -49,6 +63,24 @@ export default function MultiplyGame() {
         }
     };
 
+    useEffect(() => {
+        function handleKeyDown(e) {
+          if (e.keyCode == 13) {
+            handleSubmit(e);
+          }
+        }
+    
+        document.addEventListener('keydown', handleKeyDown);
+    
+        // Don't forget to clean up
+        return function cleanup() {
+          document.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [answer]);
+
+    useEffect(() => {
+        setAverageTime(seconds/totalCorrect);
+    }, [totalCorrect])
 
     const handleSuccessSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -63,21 +95,6 @@ export default function MultiplyGame() {
         }
         setShowUnsuccess(false);
     };
-
-    useEffect(() => {
-        function handleKeyDown(e) {
-          if (e.keyCode == 13) {
-            handleSubmit(e);
-          }
-        }
-    
-        document.addEventListener('keydown', handleKeyDown);
-    
-        // Don't forget to clean up
-        return function cleanup() {
-          document.removeEventListener('keydown', handleKeyDown);
-        }
-      }, [answer]);
 
     return (
         <>
@@ -120,9 +137,19 @@ export default function MultiplyGame() {
           }}
         >
             <Grid container spacing={2} align = "center" justify = "center" alignItems = "center">
-                <Grid item xs={12}>
+                <Grid item xs={4}>
                     <Typography color='secondary'>
                         Total Correct: {totalCorrect}
+                    </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                    <Typography color='secondary'>
+                        Total Time: {seconds}s
+                    </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                    <Typography color='secondary'>
+                        Average Time: {(totalCorrect>0)? averageTime:null}s
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
