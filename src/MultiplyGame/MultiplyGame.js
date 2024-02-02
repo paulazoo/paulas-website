@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
+import avocado from './avocado.png';
+
 const randomQuestion = () => {
     const num1 = Math.ceil(Math.random() * 100);
     const num2 = Math.ceil(Math.random() * 100);
@@ -30,6 +32,8 @@ export default function MultiplyGame() {
     const [totalCorrect, setTotalCorrect] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [averageTime, setAverageTime] = useState(null);
+    const [lastProblemTime, setLastProblemTime] = useState(0);
+    const [showReward, setShowReward] = useState(false);
 
     useEffect(() => {
         setQuestion(randomQuestion());
@@ -53,7 +57,11 @@ export default function MultiplyGame() {
             setShowSuccess(true);
             setShowUnsuccess(false);
             setAnswer('');
+            if (totalCorrect == 2) {
+                setShowReward(true);
+            }
             setTotalCorrect(totalCorrect + 1);
+            setLastProblemTime(seconds)
             setQuestion(randomQuestion());
             textInput.current.focus();
         } else {
@@ -96,12 +104,19 @@ export default function MultiplyGame() {
         setShowUnsuccess(false);
     };
 
+    const handleRewardSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setShowReward(false);
+    };
+
     return (
         <>
         <Snackbar
             anchorOrigin={{ vertical:'top', horizontal: 'center' }}
             open={showSuccess}
-            autoHideDuration={1000}
+            autoHideDuration={500}
             onClose={handleSuccessSnackbarClose}
         > 
             <Alert
@@ -115,7 +130,7 @@ export default function MultiplyGame() {
         <Snackbar
             anchorOrigin={{ vertical:'top', horizontal: 'center' }}
             open={showUnsuccess}
-            autoHideDuration={1000}
+            autoHideDuration={500}
             onClose={handleUnsuccessSnackbarClose}
         >
             <Alert
@@ -126,6 +141,13 @@ export default function MultiplyGame() {
                 Incorrect.
             </Alert>
         </Snackbar>
+        <Snackbar
+            anchorOrigin={{ vertical:'bottom', horizontal: 'center' }}
+            open={showReward}
+            autoHideDuration={1000}
+            onClose={handleRewardSnackbarClose}
+            message='You earned an avocado!'
+        />
         <Box
           sx={{
             marginTop: 8,
@@ -144,7 +166,7 @@ export default function MultiplyGame() {
                 </Grid>
                 <Grid item xs={4}>
                     <Typography color='secondary'>
-                        Total Time: {seconds}s
+                        Time: {seconds - lastProblemTime}s
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
@@ -191,6 +213,9 @@ export default function MultiplyGame() {
                         Give up and go back to home?
                     </Link>
                 </Grid>
+                {(totalCorrect > 2)? <Grid item xs={2}>
+                    <img src={avocado} alt=""/>
+                </Grid>:null}
             </Grid>
         </Box>
         </>
