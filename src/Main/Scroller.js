@@ -82,7 +82,7 @@ export default function Scroller({ height = 10, progressBar = false, progressBar
           About
         </Button>
         <Button
-          onClick={() => navigate('/multiply-game')}
+          onClick={() => navigate('/multiply')}
           variant='outlined'
           style={{bottom:'50px',
           float:'right', right:'150px'}}

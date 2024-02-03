@@ -28,7 +28,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
     <BrowserRouter>
     <Routes>
-      <Route path='/multiply-game' element={<MultiplyGame/>} />
+      <Route path='/multiply' element={<MultiplyGame/>} />
       <Route path='/about' element = {<CityAbout/>} />
       <Route exact path='/' element={<MainContainer/>} />
     </Routes>

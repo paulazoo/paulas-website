@@ -3,6 +3,9 @@ playing around with ThreeJS in React by paula zhu
 
 https://www.paulazhu.com
 
+# NEW!
+multiply game: https://www.paulazhu.com/multiply
+
 ### Currently (230629) works with
 - node: v16.15.1 (`nvm install 16.15.1`)
 - npm: 8.11.0
